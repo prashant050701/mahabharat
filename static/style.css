@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+label {
+    margin: 5px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
