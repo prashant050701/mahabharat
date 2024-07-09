@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mahabharata Translation Mapping</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Mahabharata Translation Mapping</h1>
+        <form method="post">
+            <input type="hidden" name="current_index" value="{{ current_index }}">
+            <div>
+                <h2>Verse: {{ verse['Sanskrit Text'] }}</h2>
+                <p>Verse Number: {{ verse['Verse Number'] }}</p>
+            </div>
+            <div>
+                <h3>Translation Options:</h3>
+                <label><input type="checkbox" name="selected_translation" value="{{ selected }}" checked>{{ selected }}</label><br>
+                <hr>
+                {% if unselected_from_previous %}
+                <h4>Options from Previous Paragraph:</h4>
+                {% for option in unselected_from_previous %}
+                <label><input type="checkbox" name="selected_translation" value="{{ option }}">{{ option }}</label><br>
+                {% endfor %}
+                <hr>
+                {% endif %}
+                <h4>Options from Current Paragraph:</h4>
+                {% for option in remaining_options %}
+                <label><input type="checkbox" name="selected_translation" value="{{ option }}">{{ option }}</label><br>
+                {% endfor %}
+                <hr>
+            </div>
+            <div>
+                <button type="submit" name="save">Save and Next</button>
+                <button type="submit" name="next">Next</button>
+            </div>
+        </form>
+        {% if current_index > 0 %}
+        <a href="{{ url_for('index', index=current_index-1) }}">Previous</a>
+        {% endif %}
+        <div class="master-translations">
+            <h3>Master Translations</h3>
+            {{ master_translation|safe }}
+        </div>
+    </div>
+</body>
+</html>
